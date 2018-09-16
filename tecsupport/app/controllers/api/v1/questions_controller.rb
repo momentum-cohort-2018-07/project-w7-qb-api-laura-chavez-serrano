@@ -1,16 +1,16 @@
 class Api::V1::QuestionsController < ApplicationController
-         skip_before_action :verify_authentication, only: [:index, :show]
+         #skip_before_action :verify_authentication, only: [:index, :show]
       
         before_action :set_question, only: [:show, :destroy]
       
         def index
           @questions = Question.order('created_at DESC').page(params[:page]).per(10)
-          render json: @questions
+          render :json => @questions
         end
       
         def show
             @question = Question.find(params[:id])
-        render json: @question
+        render :json => @question
         end
       
         def create
