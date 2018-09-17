@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
   def create 
     
     @answer = Answer.new(answer_params) 
-    @answer.valid = false
+    #@answer.valid = false
     if @answer.save
       question_id = @answer.question_id
       user_id = ''

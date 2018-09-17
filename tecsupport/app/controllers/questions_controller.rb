@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to @question, notice: 'question was successfully recorded.'
     else
-      render :new, notice: "Something went wrong. Please try again."
+      render :new, notice: "you need to login to enter a new Question. Please try again."
     end
   end
 
