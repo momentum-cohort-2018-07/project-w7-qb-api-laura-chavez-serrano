@@ -1,5 +1,6 @@
 class Api::V1::AnswersController < ApplicationController
-     #skip_before_action :verify_authentication
+  before_action :verify_authentication
+  skip_before_action :verify_authentication, only: [:index, :show]
 
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
   
@@ -68,6 +69,6 @@ class Api::V1::AnswersController < ApplicationController
   
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.permit(:body, :user_id, :question_id, :question_accepted_id)
+      params.permit(:body, :user_id, :question_id)
     end
 end

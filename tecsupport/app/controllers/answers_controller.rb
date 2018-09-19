@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
        user_id=@question.user_id  
       @user2 = User.find_by("id = ?", user_id)
       UserMailer.newanswer(@user2).deliver_now
-      redirect_to questions_path, notice: 'Answer was successfully launched.'
+      redirect_to questions_path, notice: 'Answer was successfully recorded.'
     else
       render :new 
     end

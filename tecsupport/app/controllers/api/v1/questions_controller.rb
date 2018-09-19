@@ -1,8 +1,8 @@
 class Api::V1::QuestionsController < ApplicationController
-         #skip_before_action :verify_authentication, only: [:index, :show]
-      
+  before_action :verify_authentication
+  skip_before_action :verify_authentication, only: [:index, :show]
         before_action :set_question, only: [:show, :destroy]
-      
+        helper_method :current_user
         def index
           @questions = Question.order('created_at DESC').page(params[:page]).per(10)
           render :json => @questions
@@ -14,15 +14,15 @@ class Api::V1::QuestionsController < ApplicationController
         end
       
         def create
-          if !token_user
+           if !token_user
             render json: {error: "Must be logged in to question"}, status: :unprocessable_entity
-          else
-            @question = Question.new(title: question_params[:title], body: question_params[:body], user_id: token_user.id)
-            if @question.save
-              render :show, status: :created, location: api_question_url(@question.id)
-            else
-              render json: @question.errors, status: :unprocessable_entity
-            end
+           else
+             @question = Question.create(
+                title: params[:title],
+                body: params[:body],
+                user_id: token_user.id)
+
+               render json: @question
           end
         end
       
@@ -35,21 +35,25 @@ class Api::V1::QuestionsController < ApplicationController
           end
         end
       
+
+
         private
       
-        def question_params
-          params.require(:question).permit(:title, :body)
-        end
-      
         def set_user
-          @user = User.find(params[:user_id])
+           @user = User.find(params[:user_id])
+          
         end
       
         def set_question
-          @question = Question.find(params[:id])
+         
+          @question= Question.find(params["id"])
           @user = @question.user
         end
+
+        def question_params
       
+          params.require(:question).permit(:title, :body)
+        end
 
       
 end

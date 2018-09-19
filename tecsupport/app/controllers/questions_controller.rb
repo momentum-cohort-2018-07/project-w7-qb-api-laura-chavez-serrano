@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
     if test == @question.user_id
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'question was successfully destructed.' }
+      format.html { redirect_to questions_url, notice: 'question was successfully delete.' }
     end
   else
     respond_to do |format|
