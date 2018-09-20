@@ -4,7 +4,13 @@ class QuestionsController < ApplicationController
   # GET /questions
   def index
     # @questions = Question.all
+    if search_params[:search_term].present?
+      @questions = Question.search_by_title_body(search_params[:search_term]).page(params[:page]).per(8)
+  else
     @questions = Question.page(params[:page])
+  end
+
+    
   end
 
   # GET /questions/1
@@ -54,7 +60,9 @@ end
     def set_question
       @question = Question.find(params[:id])
     end
-
+    def search_params
+      params.permit(:search_term)
+      end
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:title, :body, :user_id, :image)

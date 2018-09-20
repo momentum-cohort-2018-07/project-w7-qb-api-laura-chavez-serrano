@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_003720) do
+ActiveRecord::Schema.define(version: 2018_09_20_165800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,24 +36,6 @@ ActiveRecord::Schema.define(version: 2018_09_20_003720) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "add_ok_answer_to_answers", force: :cascade do |t|
-    t.boolean "ok_answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "add_valid_answer_to_answers", force: :cascade do |t|
-    t.boolean "valid_answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "add_yes_answer_to_answers", force: :cascade do |t|
-    t.boolean "yes_answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "answers", force: :cascade do |t|
     t.text "body"
     t.string "user_id"
@@ -62,6 +44,15 @@ ActiveRecord::Schema.define(version: 2018_09_20_003720) do
     t.string "question_id"
     t.integer "questionvalidateid"
     t.boolean "ok_answer"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
   create_table "questions", force: :cascade do |t|
