@@ -7,8 +7,17 @@
 
         <%= form.hidden_field :user_id, :value => current_user.id %>
         <%= form.hidden_field :question_id, :value => answer.question.id %>
+        
+    <% if current_user.id == @question.user_id %>
 
-        <div class="actions">
-          <%= form.submit :class => "btn btn-danger btn-block" %>
-        </div>
+        <%= f.check_box :ok_answer, value: true %>
+        <%= f.label "Correct Answer" %>
+        <div><%= f.submit "Validate Answer", class:"btn btn-primary" %></div>
+      <% end %>
+
+  <% if answer.ok_answer == true %>
+    <p>User Validated Answer</p>
+  <% end %>
+
+
       <% end %>

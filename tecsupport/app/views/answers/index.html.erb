@@ -14,15 +14,20 @@
 <h2>Your Answers, please valid them</h2>
 <% @question.answers.each do |answer| %>
   <p>
-  <%# <% if answer.valid = 'false' %> %>
         <strong>Description:</strong>
         <%= answer.body %>
+        <%# <% if current_user.id == @question.user_id %>
+
+        <%= check_box :ok_answer, value: true %>
+        <%= "Correct Answer" %>
+        <%# Buscar codigo de Whines para crear el update y redireccionar el link %>
+        <%# <td><%= link_to "Validate Answer", question_answer_path, method: :update</td> %> %>
+
+      <%# <% end %> %>
+
+  <% if answer.ok_answer == true %>
+    <p>User Validated Answer</p>
+  <% end %>
         </p>
-        <%# <% answer.valid = 'true'%> %>
-        <%@answer = answer%>
-        <p>
-        <%# <td><%= link_to 'Edit', edit_answer_path(answer) %></td> %>
-         <td><%= link_to "Select", edit_question_answer_path(@question, @answer) %></td> %>
-        </p>
-    <%# <% end %> %>
+        
 <% end%>
