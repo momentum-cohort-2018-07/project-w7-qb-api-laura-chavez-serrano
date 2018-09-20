@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
   def create 
     
     @answer = Answer.new(answer_params) 
-    #@answer.valid = false
+    
     if @answer.save
       question_id = @answer.question_id
       user_id = ''
@@ -34,17 +34,20 @@ class AnswersController < ApplicationController
     end  
   
     def update 
-        respond_to do |format|
-          if (answer_params[:question_validate_id] != nil && Answer.exists?(question_id: answer_params[:question_id]))
-            format.html {redirect_to @answer.question}
-          else
-            if @answer.update({question_validate_id: nil}.merge(answer_params))
-              format.html {redirect_to @answer.question, notice: 'Answer was successfully updated.'}
-            else
-              format.html {redirect_to @answer.question}
-            end
-          end
+      @answer = Answer.find(params[:id])
+      @question = @answer.question
+      if current_user.id != @question.user_id
+        redirect_to @question
+        flash[:error_message] ="You can't mark answer"
+      else
+        if @answer.update(answer_params)
+          redirect_to root_path
+        else
+          redirect_to @question
+          flash[:error_message] ="Try again"
         end
+      end
+  
     end
   
     def destroy 
@@ -64,7 +67,7 @@ class AnswersController < ApplicationController
   end
   
   def answer_params
-    params.require(:answer).permit(:user_id, :body, :question_id, :valid)
+    params.require(:answer).permit(:user_id, :body, :question_id, :ok_answer)
   end
   
   end
