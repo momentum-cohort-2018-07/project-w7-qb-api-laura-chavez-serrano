@@ -1,0 +1,38 @@
+<nav class="d-flex flex-column justify-content-centerjustify-content-lg-between flex-lg-row navbar fixed-top navbar-dark bg-info">
+  <%= link_to 'Tec-support', root_path, :class => 'navbar-brand' %>
+</nav>
+
+<h1 class='h3 mt-5 mb-3 font-weight-normal text-center'>Sign Up</h1>
+
+
+<%= form_with(model: @user, local: true, :html => {:class => 'form-signin col-md-6 offset-md-3'}) do |form| %>
+  <%= render 'shared/error_messages' %>
+
+  <div class="form-group">
+    <%= form.label :username %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text"></div>
+      </div>
+      <%= form.text_field :username, :class => "form-control", :placeholder => 'example, Teddy' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: 'form-control', :placeholder => 'password' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :password_confirmation, "Confirmation" %>
+    <%= form.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+<div class="form-group">
+    <%= form.label :email, "e-mail" %>
+    <%= form.text_field :email, class: 'form-control' %>
+  </div>
+
+  <%= form.submit "new account", :class => "btn btn-lg btn-info btn-block" %>
+  <p class="mt-5 mb-3 text-muted"></p>
+<% end %>
+
