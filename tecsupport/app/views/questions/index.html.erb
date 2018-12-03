@@ -1,0 +1,21 @@
+<nav class="d-flex flex-column justify-content-centerjustify-content-lg-between flex-lg-row navbar fixed-top navbar-dark bg-info">
+  <%= link_to '', root_path, :class => 'navbar-brand' %>
+  <div class="btn-group">
+    <% if !current_user %>
+      <%= link_to "Login", new_session_path, :class => 'btn btn-outline-light' %>
+      <%= link_to "Sign Up", new_user_path, :class => 'btn btn-outline-light' %>
+    <% else %>
+      <%= link_to 'New Question', new_question_path, :class => 'btn text-info btn-light' %>
+      <%= link_to "Log Out", session_path, method: :delete, :class => 'btn btn-outline-light' %>
+      <%= link_to current_user.username, current_user, :class => 'btn btn-outline-light' %>
+    <% end %>
+  </div>
+</nav>
+
+<% if notice %>
+  <p class="alert alert-success mt-5" role="alert"><%= notice %></p>
+<% end %>
+
+<div class='mt-5'>
+  <%= render 'shared/question_list', questions: @questions %>
+</div>
