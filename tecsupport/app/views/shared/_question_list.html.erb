@@ -33,7 +33,7 @@
               <% else %>
                 <%= (Time.now - question.updated_at).to_i / (3600 * 24) %> days ago
               <% end %>
-            by <%= link_to User.find(question.user_id).username, User.find(question.user_id), :style => 'font-size:.75rem' %>
+            by <%= link_to User.find(question.user_id).username %>
             </small>
             <% end %>
           </div>
