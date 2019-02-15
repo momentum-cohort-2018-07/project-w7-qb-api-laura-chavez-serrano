@@ -6,6 +6,7 @@
       <%= paginate @questions %> 
       <%= page_entries_info @questions %> 
       
+  
        <%= form_tag questions_path, method: :get do %>
     <%= text_field_tag :search_term, params[:search_term], :placeholder => 'Type a search here' %>
     <%= submit_tag "Search", name: nil %>
