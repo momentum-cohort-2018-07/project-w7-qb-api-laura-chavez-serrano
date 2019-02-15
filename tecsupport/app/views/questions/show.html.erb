@@ -66,11 +66,13 @@
 </div>
 <div class="form-group">
       <h3>Previous Answers</h3>
+      <%# add format to call for update in answare control %>
       <% @question.answers.each do |answer| %>
         <p>
           
           <strong>Description: </strong>
           <%= answer.body %>
+          <%answer.ok_answer%>
           <br>
           
         </p>
