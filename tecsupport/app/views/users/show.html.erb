@@ -32,7 +32,8 @@
 <% @user.questions.any? do %>
 
   <div class='mt-5'>
-    <%= render 'shared/question_list2', questions: @questions %>
+  
+    <%= render 'shared/question_list', questions: @questions %>
   </div>
 
 <% end %>
