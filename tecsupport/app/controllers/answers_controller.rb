@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
   def index
     @question = Question.find(params[:question_id])
   end
+  
   def new 
     redirect_to questions_path, notice: 'You must be logged in to comment' if !(current_user)
     @answer = Answer.new 
@@ -29,13 +30,11 @@ class AnswersController < ApplicationController
   end
   
     def edit 
-      # @answer = Answer.find(params[:id])
-      # @question
+       @answer = Answer.find(params[:id])
     end  
   
     def update 
-      @answer = Answer.find(params[:id])
-      @question = @answer.question
+     
       if current_user.id != @question.user_id
         redirect_to @question
         flash[:error_message] ="You can't mark answer"
