@@ -72,7 +72,8 @@
           
           <strong>Description: </strong>
           <%= answer.body %>
-          <%answer.ok_answer%>
+          <%= check_box(answer, answer.ok_answer, {}, "true", "false")%>
+          <%= answer.ok_answer%>
           <br>
           
         </p>
