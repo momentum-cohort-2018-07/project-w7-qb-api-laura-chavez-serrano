@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:show, :update, :destroy]
    
   def index
-    @question = Question.find(params[:question_id])
+    @answers = Answer.find(params[:question_id])
   end
   
   def new 
@@ -66,7 +66,7 @@ class AnswersController < ApplicationController
   end
   
   def answer_params
-    params.require(:answer).permit(:user_id, :body, :question_id, :ok_answer)
+    params.permit(:user_id, :body, :question_id, :ok_answer)
   end
   
   end
