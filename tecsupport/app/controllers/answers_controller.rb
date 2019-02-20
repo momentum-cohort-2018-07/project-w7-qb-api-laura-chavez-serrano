@@ -3,7 +3,9 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:show, :update, :destroy]
    
   def index
-    @answers = Answer.find(params[:question_id])
+     
+     @answers = Answer.where(question_id: params[:question_id])
+    
   end
   
   def new 
