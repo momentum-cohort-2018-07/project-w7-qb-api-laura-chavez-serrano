@@ -32,6 +32,7 @@ class AnswersController < ApplicationController
   end
   
     def edit 
+      byebug
        @answer = Answer.find(params[:id])
     end  
   
