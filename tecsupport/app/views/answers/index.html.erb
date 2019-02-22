@@ -1,14 +1,14 @@
 <nav class="d-flex flex-column justify-content-centerjustify-content-lg-between flex-lg-row navbar fixed-top navbar-dark bg-info">
   <%= link_to "Home", root_path, :class => 'btn btn-outline-light' %>
   <div class="btn-group">
-    <% if !current_user %>
+<% if !current_user %>
       <%= link_to "Login", new_session_path, :class => 'btn btn-outline-light' %>
       <%= link_to "Sign Up", new_user_path, :class => 'btn btn-outline-light' %>
     <% else %>
       <%= link_to 'New Question', new_question_path, :class => 'btn text-info btn-light' %>
       <%= link_to "Log Out", session_path, method: :delete, :class => 'btn btn-outline-light' %>
       <%= link_to current_user.username, current_user, :class => 'btn btn-outline-light' %>
-    <% end %>
+<% end %>
   </div>
 </nav>
 
@@ -24,25 +24,21 @@
             <%= question.body %>
       <h2 class="border-bottom border-info pb-2 mb-0">Answers</h2>
 
-      <% if current_user %>
-
-  <%  @answers.each do |a| %>
+      
+        <%  @answers.each do |a| %>
     
-    <div class="form-group mx-3 mb-2">
-        <%= a.question_id %>
-         <%= a.body %>
-        
-        <% answer_valid= a.ok_answer%>
-           <%if answer_valid == true%>
-          <%=check_box_tag("ok_answer", value = "1", checked = true, options = {})%>
-         
-         <%end%>
-         <td class="tbl-media"><%= link_to_if a.ok_answer.false?, "", deactive_user_path(id: user.id), method: :put, class: "fas fa-user-slash" do
-                  link_to "", deactive_user_path(id: user.id), method: :put, class: "fas fa-user"
-                  end %>
-
+            <div class="form-group mx-3 mb-2">
+                <%= a.question_id %>
+                <%= a.body %>
+                
+                <% answer_valid= a.ok_answer%>
+                
+                <%if answer_valid == true%>
+                <%=check_box_tag("ok_answer", value = "1", checked = true, options = {})%>
+                <%end%>
+                <%= link_to "Validate/Unvalidate", "question_answer_path#{a.id}" %>
        
           
-    </div>
-  <% end %>
+            </div>
+        <% end %>
        
