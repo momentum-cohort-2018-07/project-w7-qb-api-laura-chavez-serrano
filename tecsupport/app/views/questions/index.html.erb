@@ -1,5 +1,5 @@
 <nav class="d-flex flex-column justify-content-centerjustify-content-lg-between flex-lg-row navbar fixed-top navbar-dark bg-info">
-  <%= link_to '', root_path, :class => 'navbar-brand' %>
+ <%= link_to "Home", root_path, :class => 'btn btn-outline-light' %>
   <div class="btn-group">
     <% if !current_user %>
       <%= link_to "Login", new_session_path, :class => 'btn btn-outline-light' %>
