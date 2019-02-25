@@ -39,17 +39,17 @@ class AnswersController < ApplicationController
   
     def update 
      
-      if current_user.id != @question.user_id
-        redirect_to @question
-        flash[:error_message] ="You can't mark answer"
-      else
+      # if current_user.id != @question.user_id
+      #   redirect_to @question
+      #   flash[:error_message] ="You can't mark answer"
+      # else
         if @answer.update(answer_params)
           redirect_to root_path
         else
           redirect_to @question
           flash[:error_message] ="Try again"
         end
-      end
+      # end
   
     end
   

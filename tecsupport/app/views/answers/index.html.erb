@@ -35,8 +35,12 @@
                 
                 <%if answer_valid == true%>
                 <%=check_box_tag("ok_answer", value = "1", checked = true, options = {})%>
+                <% a.ok_answer = false %>
+                <%else %>
+                <% a.ok_answer = true %>
                 <%end%>
-                <%= link_to "Validate/Unvalidate", "answers/#{a.id}" %>
+                
+                <%= link_to "Validate/Unvalidate", "answers/#{a.id}", method: :patch %>
        
           
             </div>
