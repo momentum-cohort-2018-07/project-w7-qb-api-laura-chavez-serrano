@@ -36,7 +36,7 @@
                 <%if answer_valid == true%>
                 <%=check_box_tag("ok_answer", value = "1", checked = true, options = {})%>
                 <%end%>
-                <%= link_to "Validate/Unvalidate", "question_answer_path#{a.id}" %>
+                <%= link_to "Validate/Unvalidate", "answers/#{a.id}" %>
        
           
             </div>

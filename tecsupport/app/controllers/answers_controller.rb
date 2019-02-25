@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :update, :destroy]
-  before_action :set_question, only: [:show, :update, :destroy]
+  before_action :set_answer, only: [:update]
+  
    
   def index
      
@@ -30,7 +30,8 @@ class AnswersController < ApplicationController
       render :new 
     end
   end
-  
+  def show
+  end
     def edit 
       byebug
        @answer = Answer.find(params[:id])
@@ -64,7 +65,7 @@ class AnswersController < ApplicationController
   
   def set_answer
     
-    @answer = answer.find(params[:id])
+    @answer = Answer.find(params[:id])
 
   end
   
