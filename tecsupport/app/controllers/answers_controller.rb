@@ -33,23 +33,27 @@ class AnswersController < ApplicationController
   def show
   end
     def edit 
-      byebug
+      
        @answer = Answer.find(params[:id])
     end  
   
     def update 
      
-      # if current_user.id != @question.user_id
-      #   redirect_to @question
-      #   flash[:error_message] ="You can't mark answer"
-      # else
+      @answer = Answer.find(params[:id])
+    
+
+      if @answer.ok_answer == true 
+         @answer.ok_answer = false 
+      else @answer.ok_answer = true
+      end
         if @answer.update(answer_params)
+          
           redirect_to root_path
         else
           redirect_to @question
           flash[:error_message] ="Try again"
         end
-      # end
+    
   
     end
   

@@ -66,7 +66,7 @@
 </div>
 <div class="form-group">
       <h3>Previous Answers</h3>
-      <%# add format to call for update in answare control %>
+      
       <% @question.answers.each do |answer| %>
         <p>
           
@@ -75,8 +75,9 @@
            <% answer_valid= answer.ok_answer%>
            <%if answer_valid == true%>
           <%=check_box_tag("ok_answer", value = "1", checked = true, options = {})%>
-         
          <%end%>
+        
+         <%= link_to "Validate/Unvalidate", "/questions/#{@question.id}/answers/#{answer.id}", method: :patch %>
          
           <br>
           
