@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :update, :destroy]
-  before_action :set_question, only: [:show, :update, :destroy]
+  before_action :set_answer, only: [:update]
+  
    
   def index
      
@@ -30,7 +30,8 @@ class AnswersController < ApplicationController
       render :new 
     end
   end
-  
+  def show
+  end
     def edit 
       byebug
        @answer = Answer.find(params[:id])
@@ -38,17 +39,17 @@ class AnswersController < ApplicationController
   
     def update 
      
-      if current_user.id != @question.user_id
-        redirect_to @question
-        flash[:error_message] ="You can't mark answer"
-      else
+      # if current_user.id != @question.user_id
+      #   redirect_to @question
+      #   flash[:error_message] ="You can't mark answer"
+      # else
         if @answer.update(answer_params)
           redirect_to root_path
         else
           redirect_to @question
           flash[:error_message] ="Try again"
         end
-      end
+      # end
   
     end
   
@@ -64,7 +65,7 @@ class AnswersController < ApplicationController
   
   def set_answer
     
-    @answer = answer.find(params[:id])
+    @answer = Answer.find(params[:id])
 
   end
   
