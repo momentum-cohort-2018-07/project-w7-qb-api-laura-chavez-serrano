@@ -41,11 +41,8 @@ class AnswersController < ApplicationController
      
       @answer = Answer.find(params[:id])
     
-
-      if @answer.ok_answer == true 
-         @answer.ok_answer = false 
-      else @answer.ok_answer = true
-      end
+      (@answer.ok_answer==true)? @answer.ok_answer = false : @answer.ok_answer = true
+      
         if @answer.update(answer_params)
           
           redirect_to root_path
