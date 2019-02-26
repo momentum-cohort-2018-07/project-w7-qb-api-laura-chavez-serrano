@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   def index
     
     if search_params[:search_term].present?
-      @questions = Question.search_by_title_body(search_params[:search_term]).page(params[:page])
+      @questions = Question.search_by_title_body(search_params[:search_term]).page(params[:page]).sort_by(:id)
   else
   
     @questions = Question.page(params[:page])
