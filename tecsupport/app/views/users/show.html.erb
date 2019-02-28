@@ -29,12 +29,16 @@
 </main>
 
 
-<% @user.questions.any? do %>
+
 
   <div class='mt-5'>
-    <%= render 'shared/question_list2', questions: @questions %>
+<main role="main">
+  <div class="container">
+    <div class="my-3 p-3 bg-light">
+      <h2 class="border-bottom border-info pb-2 mb-0">Your Questions</h2>  
+    <%= render 'shared/question_list', questions: @questions %>
   </div>
 
-<% end %>
+
 
 

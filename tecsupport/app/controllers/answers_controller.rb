@@ -1,10 +1,9 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :update, :destroy]
-  before_action :set_question, only: [:show, :update, :destroy]
+  before_action :set_answer, only: [:update]
+  
    
-  def index
-    @question = Question.find(params[:question_id])
-  end
+  
+  
   def new 
     redirect_to questions_path, notice: 'You must be logged in to comment' if !(current_user)
     @answer = Answer.new 
@@ -27,47 +26,39 @@ class AnswersController < ApplicationController
       render :new 
     end
   end
-  
-    def edit 
-      # @answer = Answer.find(params[:id])
-      # @question
-    end  
+  def show
+  end
+    
   
     def update 
-      @answer = Answer.find(params[:id])
-      @question = @answer.question
-      if current_user.id != @question.user_id
-        redirect_to @question
-        flash[:error_message] ="You can't mark answer"
-      else
-        if @answer.update(answer_params)
+    ok_answer2 = false 
+      (@answer.ok_answer==true)? ok_answer2 = false : ok_answer2 = true
+      
+        if @answer.update(ok_answer: ok_answer2)
+          
           redirect_to root_path
         else
           redirect_to @question
           flash[:error_message] ="Try again"
         end
-      end
+    
   
     end
   
-    def destroy 
-      @answer.destroy
-      respond_to do |format|
-        format.html { redirect_to questions_path, notice: 'answer was successfully destructed.' }
-      end
-    end   
+     
   
   
   private 
   
   def set_answer
     
-    @answer = answer.find(params[:id])
+    @answer = Answer.find(params[:answer_id])
 
   end
   
   def answer_params
     params.require(:answer).permit(:user_id, :body, :question_id, :ok_answer)
+    
   end
   
   end

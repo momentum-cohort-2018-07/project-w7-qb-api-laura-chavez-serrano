@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
-  paginates_per 5
+  paginates_per 10
   include PgSearch
   pg_search_scope :search_by_title_body, :against => [:title, :body]
   has_one_attached :image  
