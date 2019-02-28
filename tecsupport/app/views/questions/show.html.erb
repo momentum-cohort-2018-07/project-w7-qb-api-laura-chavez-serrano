@@ -76,8 +76,11 @@
            <%if answer_valid == true%>
           <%=check_box_tag("ok_answer", value = "1", checked = true, options = {})%>
          <%end%>
+         
         <% if current_user.id.to_i == @question.user_id.to_i %>
-         <%= link_to "Validate/Unvalidate", "/questions/#{@question.id}/answers/#{answer.id}", method: :patch %>
+        
+         <%= link_to "Validate/Unvalidate", question_answer_path(question_id: @question.id, answer_id: answer.id, body: answer.body, user_id: answer.user_id, ok_answer: answer.ok_answer), method: :patch  %>
+         
          <%end %>
       
         

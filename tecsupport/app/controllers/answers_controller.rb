@@ -2,11 +2,7 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: [:update]
   
    
-  def index
-     
-     @answers = Answer.where(question_id: params[:question_id])
-    
-  end
+  
   
   def new 
     redirect_to questions_path, notice: 'You must be logged in to comment' if !(current_user)
@@ -32,18 +28,13 @@ class AnswersController < ApplicationController
   end
   def show
   end
-    def edit 
-      
-       @answer = Answer.find(params[:id])
-    end  
+    
   
     def update 
-     
-      @answer = Answer.find(params[:id])
-    
-      (@answer.ok_answer==true)? @answer.ok_answer = false : @answer.ok_answer = true
+    ok_answer2 = false 
+      (@answer.ok_answer==true)? ok_answer2 = false : ok_answer2 = true
       
-        if @answer.update(answer_params)
+        if @answer.update(ok_answer: ok_answer2)
           
           redirect_to root_path
         else
@@ -54,24 +45,20 @@ class AnswersController < ApplicationController
   
     end
   
-    def destroy 
-      @answer.destroy
-      respond_to do |format|
-        format.html { redirect_to questions_path, notice: 'answer was successfully destructed.' }
-      end
-    end   
+     
   
   
   private 
   
   def set_answer
     
-    @answer = Answer.find(params[:id])
+    @answer = Answer.find(params[:answer_id])
 
   end
   
   def answer_params
-    params.permit(:user_id, :body, :question_id, :ok_answer)
+    params.require(:answer).permit(:user_id, :body, :question_id, :ok_answer)
+    
   end
   
   end
